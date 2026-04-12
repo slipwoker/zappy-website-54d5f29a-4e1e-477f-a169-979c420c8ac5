@@ -10686,6 +10686,508 @@ body.accessibility-widget-visible ._access-menu {
   }
 }
 
+/* AI-generated section */
+/* =====================================================
+   Bangkok Info Section — Nova Journey Care
+   Dark elegant style, RTL, Hebrew
+   ===================================================== */
+
+.bkk-info-section {
+  position: relative;
+  background-color: #0a0c0e;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(243, 43, 151, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 80%, rgba(0, 212, 232, 0.07) 0%, transparent 55%);
+  padding: 100px 20px 80px;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+  direction: rtl;
+  text-align: right;
+  color: #e8eaf0;
+}
+
+/* --- Background Decorations --- */
+.bkk-bg-decoration {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bkk-bg-circle {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+
+.bkk-bg-circle--1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, #F32B97 0%, transparent 70%);
+  top: -200px;
+  right: -150px;
+}
+
+.bkk-bg-circle--2 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, #00D4E8 0%, transparent 70%);
+  bottom: -150px;
+  left: -100px;
+  opacity: 0.1;
+}
+
+.bkk-bg-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(243, 43, 151, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 43, 151, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* --- Container --- */
+.bkk-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- Header --- */
+.bkk-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.bkk-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(243, 43, 151, 0.12);
+  border: 1px solid rgba(243, 43, 151, 0.35);
+  border-radius: 50px;
+  padding: 7px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #f77dc4;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.bkk-badge__dot {
+  width: 7px;
+  height: 7px;
+  background: #F32B97;
+  border-radius: 50%;
+  display: inline-block;
+  animation: bkkPulse 2s ease-in-out infinite;
+}
+
+@keyframes bkkPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.7); }
+}
+
+.bkk-main-title {
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+  margin: 0 0 24px;
+  letter-spacing: -0.01em;
+}
+
+.bkk-title-accent {
+  display: block;
+  background: linear-gradient(135deg, #F32B97 0%, #E21987 50%, #00D4E8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bkk-intro-text {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.85;
+  color: #b0b8c8;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* --- Hero Image --- */
+.bkk-hero-image-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 64px;
+  border: 1px solid rgba(243, 43, 151, 0.2);
+  box-shadow:
+    0 0 0 1px rgba(0, 212, 232, 0.08),
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(243, 43, 151, 0.08);
+}
+
+.bkk-hero-image {
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  display: block;
+  max-width: 100%;
+}
+
+.bkk-hero-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 12, 14, 0.1) 0%,
+    rgba(10, 12, 14, 0.15) 40%,
+    rgba(10, 12, 14, 0.75) 100%
+  );
+}
+
+.bkk-hero-stats {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 28px 24px;
+}
+
+.bkk-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 0 36px;
+  flex: 1;
+  max-width: 220px;
+}
+
+.bkk-stat__number {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #F32B97, #00D4E8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.bkk-stat__label {
+  font-size: 12px;
+  color: #c8d0de;
+  text-align: center;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.bkk-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg, transparent, rgba(243, 43, 151, 0.4), transparent);
+  flex-shrink: 0;
+}
+
+/* --- Grid Label --- */
+.bkk-grid-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(243, 43, 151, 0.7);
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+/* --- Advantages Grid --- */
+.bkk-advantages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  list-style: none;
+  margin: 0 0 64px;
+  padding: 0;
+}
+
+/* --- Card --- */
+.bkk-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(243, 43, 151, 0.2);
+  border-radius: 16px;
+  padding: 32px 28px 36px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+  outline: none;
+}
+
+.bkk-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(243, 43, 151, 0.06) 0%, rgba(0, 212, 232, 0.03) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: inherit;
+}
+
+.bkk-card:hover,
+.bkk-card:focus-visible {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(243, 43, 151, 0.45);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(243, 43, 151, 0.1),
+    0 0 0 1px rgba(243, 43, 151, 0.15);
+}
+
+.bkk-card:hover::before,
+.bkk-card:focus-visible::before {
+  opacity: 1;
+}
+
+.bkk-card:focus-visible {
+  outline: 2px solid #F32B97;
+  outline-offset: 2px;
+}
+
+.bkk-card__accent-line {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #F32B97, #00D4E8, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.bkk-card:hover .bkk-card__accent-line,
+.bkk-card:focus-visible .bkk-card__accent-line {
+  opacity: 1;
+}
+
+.bkk-card__icon-wrap {
+  width: 56px;
+  height: 56px;
+  background: rgba(243, 43, 151, 0.08);
+  border: 1px solid rgba(243, 43, 151, 0.2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.bkk-card:hover .bkk-card__icon-wrap,
+.bkk-card:focus-visible .bkk-card__icon-wrap {
+  background: rgba(243, 43, 151, 0.15);
+  border-color: rgba(243, 43, 151, 0.4);
+}
+
+.bkk-card__icon {
+  width: 30px;
+  height: 30px;
+}
+
+.bkk-card__content {
+  position: relative;
+  z-index: 1;
+}
+
+.bkk-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px;
+  line-height: 1.35;
+}
+
+.bkk-card__text {
+  font-size: 0.9rem;
+  color: #8d9ab0;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* --- CTA Strip --- */
+.bkk-cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(243, 43, 151, 0.25);
+  border-radius: 16px;
+  padding: 32px 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bkk-cta-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(243, 43, 151, 0.07) 0%, rgba(0, 212, 232, 0.04) 100%);
+  pointer-events: none;
+}
+
+.bkk-cta-strip__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.bkk-cta-strip__headline {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.bkk-cta-strip__sub {
+  font-size: 0.95rem;
+  color: #8d9ab0;
+}
+
+.bkk-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 50px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.25s ease;
+  box-shadow: 0 8px 30px rgba(243, 43, 151, 0.35);
+  flex-shrink: 0;
+}
+
+.bkk-cta-btn:hover,
+.bkk-cta-btn:focus-visible {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 40px rgba(243, 43, 151, 0.5);
+  opacity: 0.95;
+}
+
+.bkk-cta-btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+.bkk-cta-btn__arrow {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transform: rotate(180deg); /* RTL: flip arrow */
+}
+
+/* =====================================================
+   Responsive — Tablet (max 1024px)
+   ===================================================== */
+@media (max-width: 1024px) {
+  .bkk-advantages-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* =====================================================
+   Responsive — Mobile (max 768px)
+   ===================================================== */
+@media (max-width: 768px) {
+  .bkk-info-section {
+    padding: 72px 16px 60px;
+  }
+
+  .bkk-header {
+    margin-bottom: 40px;
+  }
+
+  .bkk-hero-image {
+    height: 240px;
+  }
+
+  .bkk-hero-stats {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 16px;
+    background: rgba(10, 12, 14, 0.8);
+    backdrop-filter: blur(8px);
+  }
+
+  .bkk-stat {
+    padding: 0;
+  }
+
+  .bkk-stat-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(243, 43, 151, 0.4), transparent);
+  }
+
+  .bkk-advantages-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 48px;
+  }
+
+  .bkk-card {
+    padding: 24px 22px 28px;
+  }
+
+  .bkk-cta-strip {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    padding: 28px 24px;
+    gap: 20px;
+  }
+
+  .bkk-cta-strip__text {
+    align-items: center;
+  }
+
+  .bkk-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* =====================================================
+   Responsive — Small Mobile (max 480px)
+   ===================================================== */
+@media (max-width: 480px) {
+  .bkk-main-title {
+    font-size: 1.8rem;
+  }
+
+  .bkk-hero-image {
+    height: 200px;
+  }
+
+  .bkk-stat__number {
+    font-size: 1.6rem;
+  }
+}
+
 /* ========== RTL MOBILE NAVBAR FIX (zappy-rtl-mobile-fix) ========== */
 /* High-specificity rules to ensure RTL positioning wins over any [lang="en"] conflicts */
 /* For RTL sites: hamburger on RIGHT, phone on LEFT (mirror of LTR layout) */
