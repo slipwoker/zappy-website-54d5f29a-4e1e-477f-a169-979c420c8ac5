@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <title>התחל את מסע השינוי שלך — Nova Journey Care</title>
+    <meta name="description" content="גלה חוויית טרנספורמציה מושלמת: רפואה אסתטית, יופי ונסיעות יוקרה במסלול אחד אישי. תיירות רפואית ובריאות ברמה עולמית — מותאמת בדיוק עבורך.">
+    <meta name="keywords" content="medical wellness tourism, wellness and medical tourism, תיירות רפואית, טרנספורמציה אישית, חבילות יוקרה">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '54d5f29a-4e1e-477f-a169-979c420c8ac5',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+    <meta property="og:title" content="התחל את מסע השינוי שלך — Nova Journey Care">
+  <meta property="og:description" content="גלה חוויית טרנספורמציה מושלמת: רפואה אסתטית, יופי ונסיעות יוקרה במסלול אחד אישי. תיירות רפואית ובריאות ברמה עולמית — מותאמת בדיוק עבורך.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="התחל את מסע השינוי שלך — Nova Journey Care">
+  <meta name="twitter:description" content="גלה חוויית טרנספורמציה מושלמת: רפואה אסתטית, יופי ונסיעות יוקרה במסלול אחד אישי. תיירות רפואית ובריאות ברמה עולמית — מותאמת בדיוק עבורך.">
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: var(--text-dark, #333) !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus (exclude catalog sub-menus that use <a> children instead of <li>) */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))):not(:has(> a)), .sub-menu:not(:has(li)):not(:has(> a)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 60vh !important; overflow-y: auto !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; position: relative !important; min-height: 44px !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; min-width: 0 !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; min-width: 0 !important; padding: 0 !important; line-height: inherit !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu, .navbar li:has(.sub-menu) > .sub-menu, #navMenu li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: auto !important; background: transparent !important; border: none !important; cursor: pointer !important; color: var(--text-dark) !important; position: static !important; flex-shrink: 0 !important; align-self: stretch !important; z-index: 2 !important; padding: 0 !important; margin: 0 !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; color: var(--text-dark) !important; }
+        .navbar .sub-menu li a, nav.navbar .sub-menu li a, .zappy-products-dropdown .sub-menu a { color: var(--text-dark) !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+
+    <style id="mobile-lang-menu-deployed-css">
+    @media (max-width: 768px) {
+      .lang-switcher,
+      .nav-cta-container .lang-switcher,
+      .nav-container .lang-switcher,
+      .navbar .lang-switcher,
+      .navbar .nav-cta-container .lang-switcher,
+      .nav-icons-left .lang-switcher,
+      .nav-ecommerce-icons .lang-switcher { display: none !important; }
+      .mobile-lang-menu { width: 100%; border-top: 1px solid rgba(128,128,128,0.2); padding: 8px 0 0 0; margin-top: 8px; }
+      .mobile-lang-toggle { display: flex !important; align-items: center; justify-content: space-between; width: 100%; padding: 12px 16px; background: none; border: none; cursor: pointer; font-size: 15px; color: inherit; font-family: inherit; }
+      .mobile-lang-toggle::after { content: ''; display: inline-block; width: 8px; height: 8px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); transition: transform 0.3s ease; margin-left: 8px; }
+      .mobile-lang-toggle.expanded::after { transform: rotate(-135deg); }
+      .mobile-lang-options { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+      .mobile-lang-options.expanded { max-height: 300px; }
+      .mobile-lang-option { display: flex !important; align-items: center; gap: 10px; padding: 10px 24px; text-decoration: none; color: inherit; font-size: 14px; font-family: inherit; }
+      .mobile-lang-option:hover { background: rgba(128,128,128,0.1); }
+      .mobile-lang-option.active { font-weight: 600; opacity: 0.7; pointer-events: none; }
+      .mobile-lang-option img { width: 20px; height: 20px; border-radius: 50%; }
+    }
+    @media (min-width: 769px) {
+      .mobile-lang-menu { display: none !important; }
+    }
+    </style>
+
+    <style id="zappy-widget-visibility">
+      #mic-access-tool-general-button, .mic-access-tool-general-button,
+      #mic-init-access-tool .mic-access-tool-general-button, #mic-init-access-tool #mic-access-tool-general-button,
+      ._access-icon, #mic-access-tool-box, .mic-access-tool-box,
+      #mic-init-access-tool #mic-access-tool-box, div[id*="mic-access-tool-box"], ._access-menu {
+        display: none !important; visibility: hidden !important; opacity: 0 !important; pointer-events: none !important;
+      }
+    </style>
+</head>
+<body>
+
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display: none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+
+  <button class="phone-header-btn" data-phone="[business_phone]" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+
+  <div class="nav-container">
+    <div class="nav-right-group"><div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img src="/assets/business-logo.webp" alt="Nova Journey Care" class="logo">
+      </a>
+    </div><ul class="nav-menu" id="navMenu"><li><a href="/medical-track">01
+          מסלול רפואי</a></li><li><a href="/beauty-track">02
+          מסלול יופי</a></li><li><a href="/travel-style-track">03
+          מסלול טיול וסטייל</a></li></ul></div>
+
+    
+
+    <div class="nav-cta-container">
+      <a href="/contact" class="nav-cta-btn">צור קשר</a>
+    </div>
+  </div>
+</nav>
+<script>
+
+// Navbar Mobile Menu Toggle and Contrast Fix
+(function() {
+  // Use 'load' event instead of 'DOMContentLoaded' to ensure we run AFTER all other scripts
+  window.addEventListener('load', function() {
+    
+    // FIX MOBILE BUTTON CONTRAST
+    // Detect navbar background color and apply contrasting color to mobile buttons
+    const navbar = document.querySelector('.navbar, nav, header');
+    if (!navbar) {
+      console.log('[Navbar] Navbar element not found');
+      return;
+    }
+    
+    // DECLARE VARIABLES EARLY to avoid Temporal Dead Zone errors
+    // These are used in multiple places below
+    let mobileToggle = document.getElementById('mobileToggle') ||
+                       document.querySelector('.mobile-toggle') ||
+                       document.querySelector('.hamburger') ||
+                       document.querySelector('.hamburger-menu') ||
+                       document.querySelector('.menu-toggle') ||
+                       document.querySelector('.burger-menu') ||
+                       document.querySelector('[aria-label="Menu"]') ||
+                       document.querySelector('[aria-label="תפריט"]');
+    
+    const phoneBtn = document.querySelector('.phone-header-btn');
+    
+    const computedStyle = window.getComputedStyle(navbar);
+    let bgColor = computedStyle.backgroundColor;
+    
+    console.log('[Navbar] Initial navbar background:', bgColor);
+    
+    // Check if background is transparent or rgba with 0 alpha
+    const isTransparent = bgColor === 'transparent' || 
+                         bgColor === 'rgba(0, 0, 0, 0)' ||
+                         (bgColor.startsWith('rgba') && bgColor.includes(', 0)'));
+    
+    if (isTransparent) {
+      // Check for background-image or gradient
+      const bgImage = computedStyle.backgroundImage;
+      if (bgImage && bgImage !== 'none') {
+        console.log('[Navbar] Navbar has background image/gradient, using dark text');
+        bgColor = 'rgb(240, 240, 240)'; // Assume light background
+      } else {
+        // Transparent navbar - check body background
+        const bodyBg = window.getComputedStyle(document.body).backgroundColor;
+        console.log('[Navbar] Navbar transparent, using body background:', bodyBg);
+        bgColor = bodyBg;
+      }
+    }
+    
+    // Calculate luminance to determine if background is light or dark
+    const rgb = bgColor.match(/\d+/g);
+    if (rgb && rgb.length >= 3) {
+      const r = parseInt(rgb[0]);
+      const g = parseInt(rgb[1]);
+      const b = parseInt(rgb[2]);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      
+      // Mobile button colors are set by Claude's AI-generated CSS (same as .nav-menu a)
+      // No dynamic color overrides needed - colors come from the generated navbar CSS
+      console.log('[Navbar] Mobile button colors preserved from Claude CSS (luminance:', luminance.toFixed(2) + ')');
+      
+      // FIX ICON SIZES - Ensure SVGs are properly sized and visible
+      // INJECT CRITICAL CSS TO OVERRIDE ANY CONFLICTING RULES
+      const criticalCSS = document.createElement('style');
+      criticalCSS.id = 'zappy-mobile-nav-fix';
+      const htmlLang = document.documentElement.lang || 'en';
+      const htmlDir = document.documentElement.dir || 'ltr';
+      // Check both dir attribute AND lang for RTL detection
+      // dir="rtl" is the most reliable indicator
+      const isRTL = htmlDir === 'rtl' || htmlLang === 'he' || htmlLang === 'ar';
+      
+      criticalCSS.textContent = `
+        /* Hide mobile buttons on desktop, show only on mobile */
+        @media (min-width: 769px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            display: none !important;
+          }
+        }
+        
+        /* Show and position mobile buttons correctly on mobile */
+        @media (max-width: 768px) {
+          .mobile-toggle,
+          .phone-header-btn {
+            position: absolute !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            z-index: 1001 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 36px !important;
+            height: 36px !important;
+            border-radius: 50% !important;
+            border: none !important;
+            cursor: pointer !important;
+            padding: 6px !important;
+            background: none !important;
+            color: var(--nav-text, var(--text-dark)) !important;
+          }
+          
+          /* LTR positioning (default): hamburger LEFT, phone RIGHT */
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .mobile-toggle,
+          html[dir="ltr"] .mobile-toggle {
+            left: 12px !important;
+            right: auto !important;
+          }
+          html:not([dir="rtl"]):not([lang="he"]):not([lang="ar"]) .phone-header-btn,
+          html[dir="ltr"] .phone-header-btn {
+            right: 12px !important;
+            left: auto !important;
+          }
+          
+          /* RTL positioning: hamburger RIGHT, phone LEFT */
+          html[dir="rtl"] .mobile-toggle,
+          html[lang="he"] .mobile-toggle,
+          html[lang="ar"] .mobile-toggle {
+            right: 12px !important;
+            left: auto !important;
+          }
+          html[dir="rtl"] .phone-header-btn,
+          html[lang="he"] .phone-header-btn,
+          html[lang="ar"] .phone-header-btn {
+            left: 12px !important;
+            right: auto !important;
+          }
+          
+          /* CRITICAL: Ensure nav-container has min-height on mobile */
+          /* All children are positioned absolutely/fixed on mobile, so height:auto collapses to 0 */
+          .nav-container {
+            min-height: 70px !important;
+            position: relative !important;
+          }
+          
+          /* Ensure SVG icons are properly sized and inherit color */
+          .mobile-toggle svg,
+          .phone-header-btn svg {
+            width: 24px !important;
+            height: 24px !important;
+            /* Don't force display - let JavaScript control hamburger/close toggle */
+          }
+          
+          /* Reset nav-cta-container on mobile - remove desktop box-shadow/padding */
+          /* that creates a visible ghost box when CTA button is hidden */
+          .nav-cta-container {
+            box-shadow: none !important;
+            padding: 0 !important;
+          }
+          
+          /* Hide nav-cta-container entirely on mobile when there's no lang-switcher */
+          /* (only the CTA button is inside, and it's hidden on mobile) */
+          .nav-cta-container:not(:has(.lang-switcher)) {
+            display: none !important;
+          }
+          
+          /* CRITICAL: Prevent hero image fade gradient from bleeding over headline text */
+          /* The .image-fade-gradient has bottom: -30px (extends below parent) */
+          /* On mobile stacked layout, this overlaps the h1 text below the image */
+          .hero-image-column {
+            overflow: hidden !important;
+          }
+          .image-fade-gradient {
+            bottom: 0 !important;
+          }
+          
+          /* Hide desktop language switcher on mobile - hamburger menu handles it */
+          /* High specificity to override stored CSS */
+          .lang-switcher,
+          .nav-cta-container .lang-switcher,
+          .nav-container .lang-switcher,
+          .navbar .lang-switcher,
+          .navbar .nav-cta-container .lang-switcher {
+            display: none !important;
+          }
+        }
+      `;
+      
+      // Remove existing fix if present and inject new one
+      const existing = document.getElementById('zappy-mobile-nav-fix');
+      if (existing) existing.remove();
+      document.head.appendChild(criticalCSS);
+      
+      console.log('[Navbar] Critical CSS injected for mobile nav positioning');
+      
+      // ONLY apply inline positioning styles on mobile viewport
+      // On desktop, the CSS handles hiding these buttons with display: none
+      // Inline styles were breaking desktop layout by overriding CSS
+      const isMobileViewport = window.innerWidth <= 768;
+      
+      if (mobileToggle) {
+        // Icon sizing applies to all viewports for consistency
+        const hamburgerIcon = mobileToggle.querySelector('.hamburger-icon');
+        const closeIcon = mobileToggle.querySelector('.close-icon');
+        
+        if (hamburgerIcon) {
+          hamburgerIcon.style.setProperty('width', '24px', 'important');
+          hamburgerIcon.style.setProperty('height', '24px', 'important');
+          hamburgerIcon.style.setProperty('display', 'block', 'important'); // Show hamburger by default
+        }
+        if (closeIcon) {
+          closeIcon.style.setProperty('width', '24px', 'important');
+          closeIcon.style.setProperty('height', '24px', 'important');
+          closeIcon.style.setProperty('display', 'none', 'important'); // Hide close icon by default
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          mobileToggle.style.setProperty('position', 'absolute', 'important');
+          mobileToggle.style.setProperty('top', '50%', 'important');
+          mobileToggle.style.setProperty('transform', 'translateY(-50%)', 'important');
+          mobileToggle.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          
+          console.log('[Navbar] Mobile toggle positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          mobileToggle.style.removeProperty('position');
+          mobileToggle.style.removeProperty('top');
+          mobileToggle.style.removeProperty('transform');
+          mobileToggle.style.removeProperty('z-index');
+          mobileToggle.style.removeProperty('left');
+          mobileToggle.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared mobile toggle inline positioning');
+        }
+      }
+      
+      if (phoneBtn) {
+        // Icon sizing applies to all viewports
+        const phoneIcon = phoneBtn.querySelector('svg');
+        if (phoneIcon) {
+          phoneIcon.style.width = '24px';
+          phoneIcon.style.height = '24px';
+          phoneIcon.setAttribute('width', '24');
+          phoneIcon.setAttribute('height', '24');
+        }
+        
+        // ONLY set positioning inline styles on mobile
+        if (isMobileViewport) {
+          phoneBtn.style.setProperty('position', 'absolute', 'important');
+          phoneBtn.style.setProperty('top', '50%', 'important');
+          phoneBtn.style.setProperty('transform', 'translateY(-50%)', 'important');
+          phoneBtn.style.setProperty('z-index', '1001', 'important');
+          
+          // Clear any inline left/right so CSS can take over based on html[dir]
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          
+          console.log('[Navbar] Phone button positioning applied (mobile viewport)');
+        } else {
+          // On desktop, clear any positioning styles to let CSS handle it
+          phoneBtn.style.removeProperty('position');
+          phoneBtn.style.removeProperty('top');
+          phoneBtn.style.removeProperty('transform');
+          phoneBtn.style.removeProperty('z-index');
+          phoneBtn.style.removeProperty('left');
+          phoneBtn.style.removeProperty('right');
+          console.log('[Navbar] Desktop viewport - cleared phone button inline positioning');
+        }
+      }
+    } else {
+      console.log('[Navbar] Could not parse background color:', bgColor);
+    }
+    
+    // MOBILE MENU TOGGLE
+    // Re-query in case DOM changed (mobileToggle already declared at top of function)
+    mobileToggle = document.getElementById('mobileToggle') ||
+                   document.querySelector('.mobile-toggle') ||
+                   document.querySelector('.hamburger') ||
+                   document.querySelector('.hamburger-menu') ||
+                   document.querySelector('.menu-toggle') ||
+                   document.querySelector('.burger-menu') ||
+                   document.querySelector('[aria-label="Menu"]') ||
+                   document.querySelector('[aria-label="תפריט"]');
+    
+    // EXPANDED SEARCH: Find nav menu by ID or class
+    const navMenu = document.getElementById('navMenu') ||
+                  document.querySelector('.nav-menu') ||
+                  document.querySelector('.nav-links') ||
+                  document.querySelector('nav ul:not(.submenu)');
+    
+    if (!mobileToggle || !navMenu) {
+      console.log('[Navbar] Mobile toggle or menu not found:', { toggle: !!mobileToggle, menu: !!navMenu });
+      return;
+    }
+    
+    // Ensure navMenu has ID for CSS targeting
+    if (!navMenu.id) {
+      navMenu.id = 'navMenu';
+    }
+    
+    console.log('[Navbar] Initializing mobile menu...');
+    
+    // Remove any existing event listeners by cloning the button
+    const newToggle = mobileToggle.cloneNode(true);
+    mobileToggle.parentNode.replaceChild(newToggle, mobileToggle);
+    
+    // Toggle menu on button click - use newToggle now
+    newToggle.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const hamburgerIcon = this.querySelector('.hamburger-icon');
+      const closeIcon = this.querySelector('.close-icon');
+      const isActive = navMenu.classList.contains('active');
+      
+      if (isActive) {
+        // Close menu
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed');
+      } else {
+        // Open menu
+        navMenu.classList.add('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'none', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'block', 'important');
+        document.body.style.overflow = 'hidden';
+        console.log('[Navbar] Menu opened');
+      }
+    });
+    
+    // Close menu when clicking nav links (but NOT dropdown toggles)
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(function(link) {
+      link.addEventListener('click', function() {
+        // Don't close if it's a dropdown child (unless it's a real navigation link)
+        if (this.getAttribute('href') === '#') return;
+        
+        const hamburgerIcon = newToggle.querySelector('.hamburger-icon');
+        const closeIcon = newToggle.querySelector('.close-icon');
+        
+        navMenu.classList.remove('active');
+        if (hamburgerIcon) hamburgerIcon.style.setProperty('display', 'block', 'important');
+        if (closeIcon) closeIcon.style.setProperty('display', 'none', 'important');
+        document.body.style.overflow = '';
+        console.log('[Navbar] Menu closed (link clicked)');
+      });
+    });
+    
+    // DROPDOWN MENU TOGGLE (for mobile and touch devices)
+    var dropdownToggles = navMenu.querySelectorAll('.dropdown-toggle');
+    dropdownToggles.forEach(function(toggle) {
+      toggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var parent = this.closest('.nav-dropdown');
+        if (!parent) return;
+        
+        // Close other open dropdowns at the same level
+        var siblings = parent.parentNode.querySelectorAll('.nav-dropdown.open');
+        siblings.forEach(function(sib) {
+          if (sib !== parent) sib.classList.remove('open');
+        });
+        
+        parent.classList.toggle('open');
+        console.log('[Navbar] Dropdown toggled:', parent.classList.contains('open') ? 'open' : 'closed');
+      });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.nav-dropdown')) {
+        var openDropdowns = document.querySelectorAll('.nav-dropdown.open');
+        openDropdowns.forEach(function(dd) { dd.classList.remove('open'); });
+      }
+    });
+    
+    console.log('[Navbar] Dropdown handlers initialized for ' + dropdownToggles.length + ' dropdowns');
+    
+    // Phone button functionality (phoneBtn already declared at top of function)
+    if (phoneBtn) {
+      phoneBtn.addEventListener('click', function() {
+        // Get phone number from placeholder in page or use default
+        const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
+        const phoneNumber = phoneLinks.length > 0 
+          ? phoneLinks[0].getAttribute('href').replace('tel:', '')
+          : '[business_phone]';
+        
+        window.location.href = 'tel:' + phoneNumber;
+        console.log('[Navbar] Phone button clicked');
+      });
+    }
+    
+    console.log('[Navbar] Mobile menu initialized successfully');
+    
+    // === WHATSAPP BUTTON VISIBILITY FIX ===
+    // Ensure WhatsApp floating button is hidden on desktop and visible on mobile
+    // IMPORTANT: Only target the floating button by its class, NOT generic wa.me links
+    const handleWhatsAppVisibility = function() {
+      const whatsappBtn = document.querySelector('.whatsapp-float');
+      if (whatsappBtn) {
+        const isDesktop = window.innerWidth >= 769;
+        if (isDesktop) {
+          whatsappBtn.style.setProperty('display', 'none', 'important');
+          whatsappBtn.style.setProperty('visibility', 'hidden', 'important');
+          whatsappBtn.style.setProperty('opacity', '0', 'important');
+          whatsappBtn.style.setProperty('pointer-events', 'none', 'important');
+          console.log('[WhatsApp] Button hidden on desktop');
+        } else {
+          whatsappBtn.style.removeProperty('display');
+          whatsappBtn.style.removeProperty('visibility');
+          whatsappBtn.style.removeProperty('opacity');
+          whatsappBtn.style.removeProperty('pointer-events');
+          console.log('[WhatsApp] Button visible on mobile');
+        }
+      }
+    };
+    
+    // Run on load
+    handleWhatsAppVisibility();
+    
+    // Run on resize with debouncing
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(handleWhatsAppVisibility, 100);
+    });
+  });
+})();
+
+</script>
+  
+  <main>
+    <section class="index-hero-section" data-layout-spec="בית-hero" dir="rtl" data-hero-type="fullscreen-scrim">
+  <!-- Background Image Layer -->
+  <div class="index-hero-bg">
+    <img data-hero-bg="true" data-placeholder="index-hero-image-1" data-context="A poised, elegant woman in a luxurious clinic-lounge environment with warm low-key lighting. The setting blends premium medical aesthetics with high-end spa hospitality — think polished marble surfaces, soft ambient light, a refined treatment chair, and subtle luxury travel accessories visible in the background. The mood is cinematic, aspirational, and intimate. Dark, moody atmosphere with warm champagne gold highlights. Ultra-high-end editorial photography style." width="1440" height="900" src="/assets/site-index-hero-image-1.webp" alt="אישה אלגנטית בסביבת קליניקה יוקרתית — Nova Journey Care">
+  </div>
+
+  <!-- Scrim Overlay -->
+  <div class="index-hero-scrim" aria-hidden="true"></div>
+
+  <!-- Content Overlay -->
+  <div class="index-hero-content">
+    <div class="index-hero-inner">
+
+      <!-- Label -->
+      <span class="index-hero-label">המסע שלך לשינוי מתחיל כאן</span>
+
+      <!-- H1 -->
+      <h1 class="index-hero-h1">Nova Journey Care</h1>
+
+      <!-- Champagne hairline -->
+      <div class="index-hero-hairline" aria-hidden="true"></div>
+
+      <!-- Subtitle -->
+      <h3 class="index-hero-subtitle">רפואה אסתטית, טיפולי יופי וסטיילינג אישי — חוויה אחת, מותאמת לך בלבד.</h3>
+
+      <!-- CTA Group -->
+      <div class="index-hero-ctas">
+        <a href="#tracks" class="index-hero-btn-primary">גלו את המסלולים שלנו</a>
+        <a href="/contact" class="index-hero-btn-secondary">ייעוץ אישי חינם</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bottom Divider: diagonal gradient haze with orchid-to-cyan light trace -->
+  <div class="index-hero-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 110" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="heroScrimBottom" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="#E91E8C" stop-opacity="0.55"></stop>
+          <stop offset="50%" stop-color="#9B2FFF" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-color="#00D4FF" stop-opacity="0.55"></stop>
+        </linearGradient>
+      </defs>
+      <!-- Dark fill — fills bottom, matching next section -->
+      <path d="M0,110 L0,52 Q180,22 360,44 T720,28 Q900,14 1080,38 T1440,20 L1440,110 Z" fill="#090B12"></path>
+      <!-- Orchid-to-cyan light trace along the diagonal edge -->
+      <path d="M0,52 Q180,22 360,44 T720,28 Q900,14 1080,38 T1440,20 L1440,26 Q1080,44 900,20 T720,34 Q540,50 360,50 T0,58 Z" fill="#090B12" opacity="0.7"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="index-tracks-section" data-layout-spec="בית-tracks" dir="rtl">
+  <div class="tracks-bg-pattern"></div>
+
+  <div class="tracks-container">
+
+    <!-- Intro Block -->
+    <div class="tracks-intro">
+      <span class="tracks-eyebrow">המסלולים שלנו</span>
+      <h2 class="tracks-heading">שלושה מסלולים.<br><em>מסע אחד.</em></h2>
+      <p class="tracks-subtext">תוכלו לבחור מסלול אחד שמדבר אליכם, או לשלב את כולם לחבילה מותאמת אישית — מרפואה אסתטית ועד חופשת יוקרה מלאה. כל מסע מתוכנן בדיוק בשבילכם.</p>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="tracks-grid">
+
+      <!-- Medical Track Card -->
+      <article class="track-card track-card--medical">
+        <div class="track-card-image-wrap">
+          <img data-placeholder="index-tracks-image-1" data-context="Elegant medical aesthetics clinic interior with soft lighting, modern equipment, a doctor in white coat consulting a patient. Premium clinical environment suggesting hair transplant and anti-aging treatments. Dark moody atmosphere with subtle blue-teal highlights." width="600" height="400" src="/assets/site-index-tracks-image-1.webp" alt="מסלול רפואי - השתלת שיער וטיפולי עור">
+          <div class="track-card-image-overlay"></div>
+        </div>
+        <div class="track-card-content">
+          <div class="track-badge track-badge--medical">
+            <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+            <span>Medical Track</span>
+          </div>
+          <h3 class="track-card-title">מסלול רפואי</h3>
+          <p class="track-card-desc">טיפולים רפואיים אסתטיים ברמה הגבוהה ביותר, המשלבים מומחיות קלינית עם תוצאות שמשנות חיים.</p>
+          <ul class="track-services">
+            <li>
+              <span class="service-dot service-dot--cyan"></span>
+              <span>השתלת שיער</span>
+            </li>
+            <li>
+              <span class="service-dot service-dot--cyan"></span>
+              <span>טיפולי עור מתקדמים</span>
+            </li>
+            <li>
+              <span class="service-dot service-dot--cyan"></span>
+              <span>אנטי-אייג׳ינג</span>
+            </li>
+          </ul>
+          <div class="track-card-glow track-card-glow--cyan"></div>
+        </div>
+      </article>
+
+      <!-- Beauty Track Card -->
+      <article class="track-card track-card--beauty">
+        <div class="track-card-image-wrap">
+          <img data-placeholder="index-tracks-image-2" data-context="Luxurious beauty treatment room with a woman receiving a facial treatment. Elegant spa-like atmosphere with warm pink and gold tones, professional beauty equipment, soft bokeh lighting suggesting premium cosmetic and laser treatments." width="600" height="400" src="/assets/site-index-tracks-image-2.webp" alt="מסלול יופי - טיפולי פנים ולייזר">
+          <div class="track-card-image-overlay"></div>
+        </div>
+        <div class="track-card-content">
+          <div class="track-badge track-badge--beauty">
+            <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"></path><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+            <span>Beauty Track</span>
+          </div>
+          <h3 class="track-card-title">מסלול יופי</h3>
+          <p class="track-card-desc">טיפולי יופי פרמיום המשלבים קוסמטיקה מתקדמת עם טכנולוגיות לייזר חדישות לתוצאות מרהיבות.</p>
+          <ul class="track-services">
+            <li>
+              <span class="service-dot service-dot--orchid"></span>
+              <span>קוסמטיקה מקצועית</span>
+            </li>
+            <li>
+              <span class="service-dot service-dot--orchid"></span>
+              <span>טיפולי פנים</span>
+            </li>
+            <li>
+              <span class="service-dot service-dot--orchid"></span>
+              <span>טיפולי לייזר</span>
+            </li>
+          </ul>
+          <div class="track-card-glow track-card-glow--orchid"></div>
+        </div>
+      </article>
+
+      <!-- Travel & Style Track Card (wide) -->
+      <article class="track-card track-card--travel">
+        <div class="track-card-image-wrap">
+          <img data-placeholder="index-tracks-image-3" data-context="Luxurious travel and lifestyle scene showing a stylish woman shopping in a high-end boutique or relaxing at a 5-star spa resort pool. Warm golden tones, elegant fashion, tropical or European luxury destination background suggesting premium wellness tourism and personal styling." width="900" height="400" src="/assets/site-index-tracks-image-3.webp" alt="מסלול טיול וסטייל - קניות, חופשות וספא">
+          <div class="track-card-image-overlay"></div>
+        </div>
+        <div class="track-card-content track-card-content--wide">
+          <div class="travel-content-inner">
+            <div class="travel-text-col">
+              <div class="track-badge track-badge--travel">
+                <svg data-element-type="icon" data-icon-type="svg" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <span>Travel &amp; Style Track</span>
+              </div>
+              <h3 class="track-card-title">מסלול טיול וסטייל</h3>
+              <p class="track-card-desc">חוויית הלייפסטייל האולטימטיבית — קניות עם סטייליסטית אישית, חופשות יוקרה, וטיפולי ספא שמחדשים גוף ונפש.</p>
+            </div>
+            <ul class="track-services track-services--travel">
+              <li>
+                <span class="service-dot service-dot--gold"></span>
+                <span>קניות עם סטייליסטית אישית</span>
+              </li>
+              <li>
+                <span class="service-dot service-dot--gold"></span>
+                <span>חופשות יוקרה מותאמות</span>
+              </li>
+              <li>
+                <span class="service-dot service-dot--gold"></span>
+                <span>ספא ומסאז׳ים</span>
+              </li>
+            </ul>
+          </div>
+          <div class="track-card-glow track-card-glow--gold"></div>
+        </div>
+      </article>
+
+    </div>
+    <!-- /Cards Grid -->
+
+    <!-- Combine CTA line -->
+    <div class="tracks-combine">
+      <span class="tracks-combine-line"></span>
+      <p class="tracks-combine-text">ניתן לבחור מסלול אחד או לשלב את כולם — <strong>חבילות בהתאמה אישית מלאה</strong></p>
+      <span class="tracks-combine-line"></span>
+    </div>
+
+  </div>
+  <!-- /tracks-container -->
+
+  <!-- Bottom luminous divider -->
+  <div class="tracks-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="dividerGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="transparent"></stop>
+          <stop offset="20%" stop-color="rgba(0,212,255,0.18)"></stop>
+          <stop offset="50%" stop-color="rgba(233,30,140,0.22)"></stop>
+          <stop offset="80%" stop-color="rgba(0,212,255,0.14)"></stop>
+          <stop offset="100%" stop-color="transparent"></stop>
+        </linearGradient>
+        <filter id="glowBlur">
+          <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+          <feMerge><feMergeNode in="blur"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+        </filter>
+      </defs>
+      <!-- Luminous contour line -->
+      <path d="M0,30 Q120,18 240,26 T480,22 Q600,18 720,28 T960,20 Q1080,16 1200,24 T1440,18" fill="#F7F3EE" stroke="url(#dividerGlow)" stroke-width="1.5" filter="url(#glowBlur)"></path>
+      <!-- Fill bottom to next section bg -->
+      <path d="M0,60 L0,32 Q120,20 240,28 T480,24 Q600,20 720,30 T960,22 Q1080,18 1200,26 T1440,20 L1440,60 Z" fill="#F7F3EE"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="index-packages-section" data-layout-spec="בית-packages" dir="rtl">
+  <div class="index-packages-container">
+
+    <!-- Top layout: text column + lifestyle image -->
+    <div class="index-packages-top">
+      <div class="index-packages-text-col">
+        <span class="index-packages-eyebrow">חבילות בהתאמה אישית</span>
+        <h2 class="index-packages-heading">המסע שלך,<br><em>בדיוק כפי שדמיינת אותו</em></h2>
+        <div class="index-packages-hairline"></div>
+        <p class="index-packages-lead">כל לקוח מגיע עם חלום שונה. ב-Nova Journey Care אנו בונים עבורך חבילה שלמה ומדויקת — שילוב ייחודי של רפואה אסתטית, טיפולי יופי, סטיילינג אישי וחוויית נסיעה יוקרתית. תכנון דיסקרטי, ליווי מלא, ותוצאה אחת מאוחדת שנבנית סביבך בלבד.</p>
+        <a href="#contact" class="index-packages-cta btn-primary">בנה את החבילה שלך</a>
+      </div>
+
+      <div class="index-packages-image-col">
+        <figure class="index-packages-main-figure">
+          <img data-placeholder="index-packages-image-1" data-context="Refined luxury wellness travel scene: an elegant woman in a plush hotel spa robe seated by a floor-to-ceiling window overlooking a European city skyline at golden hour. The setting conveys premium personal transformation — calm, aspirational, and exclusive. Warm ivory and champagne tones, soft natural light, no clutter." width="620" height="740" src="/assets/site-index-packages-image-1.webp" alt="חוויית ספא יוקרתית עם נוף עירוני בשעת הזהב">
+        </figure>
+        <div class="index-packages-image-accent">
+          <img data-placeholder="index-packages-image-2" data-context="Close-up editorial detail: a luxury travel flatlay on ivory linen — a small bouquet of white flowers, a passport, a champagne flute, and a sleek skincare vial. Soft-focus background, champagne gold tones, minimal and couture-like composition for a medical tourism and beauty brand." width="260" height="200" src="/assets/site-index-packages-image-2.webp" alt="פרטי נסיעה יוקרתיים — דרכון, טיפוח ופרחים לבנים">
+        </div>
+      </div>
+    </div>
+
+    <!-- Package tiles grid -->
+    <div class="index-packages-grid">
+
+      <article class="index-packages-tile">
+        <div class="index-packages-tile-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1.2"></circle>
+            <path d="M18 10v16M10 18h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-packages-tile-body">
+          <h3 class="index-packages-tile-title">רפואה אסתטית</h3>
+          <p class="index-packages-tile-text">השתלות שיער, טיפולי עור מתקדמים ופרוטוקולי אנטי-אייג'ינג — מתוכננים ומלווים על ידי מומחים, עם תיאום מלא מרגע ההגעה ועד ההחלמה.</p>
+        </div>
+      </article>
+
+      <article class="index-packages-tile">
+        <div class="index-packages-tile-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <ellipse cx="18" cy="22" rx="10" ry="6" stroke="currentColor" stroke-width="1.2"></ellipse>
+            <path d="M12 22c0-5 3-10 6-14 3 4 6 9 6 14" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-packages-tile-body">
+          <h3 class="index-packages-tile-title">טיפולי יופי</h3>
+          <p class="index-packages-tile-text">קוסמטיקה מקצועית, טיפולי פנים מעמיקים וטיפולי לייזר מהדור החדש — חוויה מרגיעה ומחדשת שמשלימה את המסע הרפואי שלך.</p>
+        </div>
+      </article>
+
+      <article class="index-packages-tile">
+        <div class="index-packages-tile-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="9" y="13" width="18" height="14" rx="1" stroke="currentColor" stroke-width="1.2"></rect>
+            <path d="M13 13V11a5 5 0 0110 0v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-packages-tile-body">
+          <h3 class="index-packages-tile-title">סטיילינג אישי</h3>
+          <p class="index-packages-tile-text">קניות מודרכות עם סטייליסטית אישית, עיצוב אופי לבוש מחודש, ובחירת ארדרוב שמשקפת את הגרסה הטובה ביותר שלך — לאחר השינוי.</p>
+        </div>
+      </article>
+
+      <article class="index-packages-tile">
+        <div class="index-packages-tile-icon">
+          <svg data-element-type="icon" data-icon-type="svg" width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 24l4-8 4 5 4-10 4 13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M6 28h24" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path>
+          </svg>
+        </div>
+        <div class="index-packages-tile-body">
+          <h3 class="index-packages-tile-title">חופשה מלאה</h3>
+          <p class="index-packages-tile-text">ספא, מסאז'ים, לינה יוקרתית ותכנון מסלול מותאם אישית — כל זה משולב בחבילה אחת רציפה שמאפשרת לך לנוח, להתחדש ולחזור שונה.</p>
+        </div>
+      </article>
+
+    </div>
+    <!-- /grid -->
+
+  </div>
+
+  <!-- Bottom arc divider transitioning to dark section -->
+  <div class="index-packages-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="arcEdgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="rgba(0,212,255,0)"></stop>
+          <stop offset="30%" stop-color="rgba(0,212,255,0.55)"></stop>
+          <stop offset="70%" stop-color="rgba(233,30,140,0.55)"></stop>
+          <stop offset="100%" stop-color="rgba(233,30,140,0)"></stop>
+        </linearGradient>
+      </defs>
+      <!-- Dark fill bottom -->
+      <path d="M0,90 L0,52 Q360,8 720,18 Q1080,28 1440,52 L1440,90 Z" fill="#090B12"></path>
+      <!-- Glowing arc edge line -->
+      <path d="M0,52 Q360,8 720,18 Q1080,28 1440,52" fill="#090B12" stroke="url(#arcEdgeGrad)" stroke-width="1.5"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="index-journey-section" data-layout-spec="בית-journey" dir="rtl">
+  <!-- Route line SVG background -->
+  <div class="journey-route-lines" aria-hidden="true">
+    <svg viewBox="0 0 1280 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" data-no-icon-edit="true" aria-hidden="true">
+      <path d="M 1200,80 C 900,80 700,220 600,300 C 500,380 380,420 200,480 C 80,520 40,600 60,720" stroke="rgba(0,212,255,0.07)" stroke-width="1.5" fill="none" stroke-dasharray="6 10"></path>
+      <path d="M 1100,150 C 850,180 680,280 560,380 C 440,480 300,520 150,600" stroke="rgba(0,212,255,0.05)" stroke-width="1" fill="none" stroke-dasharray="4 14"></path>
+      <circle cx="1200" cy="80" r="3" fill="rgba(0,212,255,0.18)"></circle>
+      <circle cx="600" cy="300" r="3" fill="rgba(0,212,255,0.18)"></circle>
+      <circle cx="200" cy="480" r="3" fill="rgba(0,212,255,0.18)"></circle>
+      <circle cx="60" cy="720" r="3" fill="rgba(0,212,255,0.18)"></circle>
+    </svg>
+  </div>
+
+  <div class="journey-container">
+    <!-- Section Header -->
+    <header class="journey-header">
+      <p class="journey-eyebrow">המסע שלך</p>
+      <h2 class="journey-title">Nova Journey Care מלווה אותך<br><em>מהשיחה הראשונה ועד הבית</em></h2>
+      <p class="journey-subtitle">שילוב ייחודי של דיוק רפואי, ביטחון אישי ותיאום יוקרתי — כל שלב בדרך מתוכנן עבורך בלבד. <span class="journey-keyword">medical wellness tourism</span> בגישה אישית ומוקפדת.</p>
+    </header>
+
+    <!-- Milestones Grid -->
+    <div class="journey-milestones">
+
+      <!-- Milestone 1 — right side, top -->
+      <article class="journey-milestone milestone-1">
+        <div class="milestone-inner">
+          <div class="milestone-number">01</div>
+          <div class="milestone-content">
+            <div class="milestone-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg" aria-hidden="true">
+                <circle cx="14" cy="10" r="5" stroke="currentColor" stroke-width="1.4"></circle>
+                <path d="M4 24c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h3 class="milestone-title">הערכה אישית</h3>
+            <p class="milestone-desc">שיחת ייעוץ מעמיקה שבה נלמד להכיר אתכם — מטרות, ציפיות, בריאות ואורח חיים. הבסיס לכל מסע מוצלח.</p>
+          </div>
+        </div>
+        <div class="milestone-connector" aria-hidden="true"></div>
+      </article>
+
+      <!-- Milestone 2 — left side, offset -->
+      <article class="journey-milestone milestone-2">
+        <div class="milestone-inner">
+          <div class="milestone-number">02</div>
+          <div class="milestone-content">
+            <div class="milestone-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg" aria-hidden="true">
+                <rect x="4" y="6" width="20" height="16" rx="2" stroke="currentColor" stroke-width="1.4"></rect>
+                <path d="M9 12h10M9 16h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"></path>
+              </svg>
+            </div>
+            <h3 class="milestone-title">תכנון הטיפול</h3>
+            <p class="milestone-desc">בניית תוכנית טיפולים מותאמת אישית — השתלות שיער, אנטי-אייג'ינג, לייזר או שילוב ייחודי — עם לוח זמנים ברור ומקצועי.</p>
+          </div>
+        </div>
+        <div class="milestone-connector" aria-hidden="true"></div>
+      </article>
+
+      <!-- Milestone 3 — right side, lower -->
+      <article class="journey-milestone milestone-3">
+        <div class="milestone-inner">
+          <div class="milestone-number">03</div>
+          <div class="milestone-content">
+            <div class="milestone-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg" aria-hidden="true">
+                <path d="M14 4l2.5 5 5.5.8-4 3.9.95 5.5L14 16.5l-4.95 2.7.95-5.5L6 9.8l5.5-.8L14 4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"></path>
+              </svg>
+            </div>
+            <h3 class="milestone-title">יופי, סטיילינג ותוספות</h3>
+            <p class="milestone-desc">הוספת שכבת יוקרה — טיפולי פנים, קוסמטיקה, קניות עם סטייליסטית אישית, ספא ומסאז'ים — כל מה שמשלים את השינוי.</p>
+          </div>
+        </div>
+        <div class="milestone-connector" aria-hidden="true"></div>
+      </article>
+
+      <!-- Milestone 4 — left side, bottom -->
+      <article class="journey-milestone milestone-4">
+        <div class="milestone-inner">
+          <div class="milestone-number">04</div>
+          <div class="milestone-content">
+            <div class="milestone-icon-wrap">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" data-element-type="icon" data-icon-type="svg" aria-hidden="true">
+                <path d="M14 4C9.582 4 6 7.582 6 12c0 6 8 14 8 14s8-8 8-14c0-4.418-3.582-8-8-8z" stroke="currentColor" stroke-width="1.4"></path>
+                <circle cx="14" cy="12" r="2.5" stroke="currentColor" stroke-width="1.4"></circle>
+              </svg>
+            </div>
+            <h3 class="milestone-title">החלמה ונסיעה בנוחות</h3>
+            <p class="milestone-desc">ליווי מלא לאורך תקופת ההחלמה: לינה מפנקת, העברות, תמיכה רפואית ותיאום חופשה — כדי שתחזרו הביתה רעננים ומחודשים.</p>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /.journey-milestones -->
+
+    <!-- Supporting paragraph -->
+    <div class="journey-support-text">
+      <p>כל חבילה ב-Nova Journey Care מתוכננת סביב שלושה עמודי תווך: <strong>דיוק רפואי</strong> ממומחים מובילים, <strong>ביטחון רגשי</strong> לאורך כל שלב, ו<strong>תיאום יוקרתי</strong> שמוציא לכם את הידיים. זהו wellness and medical tourism ברמה שלא הכרתם.</p>
+    </div>
+
+  </div><!-- /.journey-container -->
+
+  <!-- Decorative image tile — peeking from bottom-start corner -->
+  <div class="journey-image-tile" aria-hidden="false">
+    <img data-placeholder="index-journey-image-1" data-context="Luxury medical wellness tourism — a serene, elegant recovery lounge with warm amber lighting, a reclining chair, fresh flowers, and a blurred cityscape view through floor-to-ceiling glass. Cinematic dark mood, premium spa aesthetic, soft bokeh, high-end medical tourism ambiance." width="420" height="560" src="/assets/site-index-journey-image-1.webp" alt="חדר החלמה יוקרתי עם תאורת אמבר ונוף עירוני — Nova Journey Care">
+    <div class="journey-image-glow" aria-hidden="true"></div>
+  </div>
+
+  <!-- Bottom torn-film divider -->
+  <div class="journey-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1280 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Glow bloom -->
+      <defs>
+        <radialGradient id="journeyGlow" cx="50%" cy="100%" r="50%">
+          <stop offset="0%" stop-color="rgba(0,212,255,0.12)"></stop>
+          <stop offset="100%" stop-color="rgba(0,212,255,0)"></stop>
+        </radialGradient>
+      </defs>
+      <ellipse cx="640" cy="90" rx="480" ry="48" fill="url(#journeyGlow)"></ellipse>
+      <!-- Torn film edge — fills bottom, merges with next dark section -->
+      <path d="M0,90 L0,42 Q32,38 64,44 T128,40 Q160,44 192,37 T256,42 Q290,38 320,44 T384,39 Q416,43 448,37 T512,41 Q546,38 576,44 T640,38 Q672,43 704,37 T768,42 Q800,38 832,44 T896,39 Q928,43 960,37 T1024,42 Q1056,38 1088,44 T1152,39 Q1184,43 1216,37 T1280,42 L1280,90 Z" fill="var(--bg-dark)"></path>
+    </svg>
+  </div>
+
+</section>
+
+<section class="index-cta-section" data-layout-spec="בית-cta" dir="rtl">
+  <div class="index-cta-bg-image">
+    <img data-placeholder="index-cta-image-1" data-context="Aerial view of a luxury spa retreat at dusk — a serene infinity pool reflecting golden light, surrounded by lush greenery and elegant stone architecture. Cinematic, moody atmosphere with soft warm tones and deep shadows. Premium wellness destination aesthetic, suitable for medical tourism and beauty transformation brand." width="1440" height="800" src="/assets/site-index-cta-image-1.webp" alt="יעד ספא יוקרתי — חוויית שינוי אישי מלאה">
+    <div class="index-cta-overlay"></div>
+  </div>
+
+  <div class="index-cta-container">
+    <div class="index-cta-content">
+      <div class="index-cta-gold-rule"></div>
+
+      <h2 class="index-cta-heading">המסע שלך לשינוי אישי<br><em>מתחיל כאן</em></h2>
+
+      <p class="index-cta-subtext">ליווי אישי ופרטי לאורך כל הדרך — מבחירת הטיפול ועד לרגע החזרה הביתה. חבילות בהתאמה אישית המשלבות רפואה אסתטית, טיפולי יופי, וחופשה מלאה — כולל medical wellness tourism ברמה הגבוהה ביותר.</p>
+
+      <div class="index-cta-actions">
+        <a href="/contact" class="btn-primary index-cta-btn-primary">צרו קשר ונתחיל יחד</a>
+        <a href="/#tracks" class="index-cta-link-secondary">גלו את המסלולים שלנו <span class="index-cta-arrow">←</span></a>
+      </div>
+
+      <div class="index-cta-tracks">
+        <span class="index-cta-track-tag">Medical Track</span>
+        <span class="index-cta-track-sep">·</span>
+        <span class="index-cta-track-tag">Beauty Track</span>
+        <span class="index-cta-track-sep">·</span>
+        <span class="index-cta-track-tag">Travel &amp; Style Track</span>
+      </div>
+
+      <div class="index-cta-gold-rule index-cta-gold-rule--bottom"></div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-glow-bar"></div><div class="footer-container"><div class="footer-top"><div class="footer-col footer-col--brand"><div class="footer-logo-wrap"><img src="/assets/business-logo.webp" alt="Nova Journey Care" class="logo"></div><p class="footer-tagline">מסע שלם. גוף, יופי, נפש.</p><p class="footer-desc">Nova Journey Care מעצבת עבורך חוויה אישית ומדויקת — שילוב של טיפול רפואי מוביל, יופי עכשווי ותיירות יוקרתית בלתי נשכחת.</p><div class="footer-social"><a href="[facebook_handle]" aria-label="Facebook" class="social-link"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" class="social-link"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" class="social-link"><i class="fab fa-whatsapp"></i></a></div></div><div class="footer-col footer-col--links"><h4 class="footer-heading"><span class="footer-heading-line"></span>מסלולים</h4><ul class="footer-nav"><li><a href="/medical-track"><span class="nav-arrow">←</span>מסלול רפואי</a></li><li><a href="/beauty-track"><span class="nav-arrow">←</span>מסלול יופי</a></li><li><a href="/travel-style-track"><span class="nav-arrow">←</span>מסלול טיול וסטייל</a></li><li><a href="/contact"><span class="nav-arrow">←</span>צור קשר</a></li></ul></div><div class="footer-col footer-col--contact"><h4 class="footer-heading"><span class="footer-heading-line"></span>יצירת קשר</h4><ul class="footer-contact"><li><span class="contact-icon"><i class="fas fa-envelope"></i></span><span class="contact-text"><a href="mailto:[business_email]">[business_email]</a></span></li><li><span class="contact-icon"><i class="fas fa-phone"></i></span><span class="contact-text"><a href="tel:[business_phone]">[business_phone]</a></span></li><li><a href="/"><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span><span class="contact-text">[business_address]</span></a></li></ul></div><div class="footer-col footer-col--badge"><div class="footer-badge"><div class="badge-inner"><span class="badge-icon"><i class="fas fa-star"></i></span><span class="badge-title">חברות פרטית</span><span class="badge-sub">טיפול אישי ומדויק</span></div></div><div class="footer-badge footer-badge--secondary"><div class="badge-inner"><span class="badge-icon"><i class="fas fa-shield-alt"></i></span><span class="badge-title">בטיחות ואמינות</span><span class="badge-sub">סטנדרטים בינלאומיים</span></div></div></div></div><div class="footer-divider"></div><div class="footer-bottom"><div class="footer-bottom-copy">© 2026 Nova Journey Care. כל הזכויות שמורות.</div><div class="footer-bottom-links"><a href="/privacy">מדיניות פרטיות</a><span class="footer-sep">·</span><a href="/terms">תנאי שימוש</a><span class="footer-sep">·</span><a href="/accessibility">נגישות</a><span class="footer-sep">·</span><a href="https://zappy5.com" target="_blank" class="zappy-attribution">נוצר באמצעות Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <div data-integration="accessibility:toolbar"></div>
+
+    <script src="/script.js"></script>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+
+    <script id="zappy-navbar-scroll-effect">
+    (function(){
+      var nb=document.querySelector('nav.navbar,.navbar:not(.zappy-catalog-menu)');
+      var cm=document.querySelector('.zappy-catalog-menu,#zappy-catalog-menu');
+      if(!nb)return;
+      var fb='rgba(247,243,238,0.85)';
+      var th=60;
+      var rs=getComputedStyle(document.documentElement);
+      var td=rs.getPropertyValue('--text-dark').trim()||'#1a1a1a';
+      var tl=rs.getPropertyValue('--text-light').trim()||'#ffffff';
+      var st=true?td:tl;
+      nb.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease,box-shadow 0.3s ease';
+      if(cm)cm.style.transition='background 0.3s ease,backdrop-filter 0.3s ease,-webkit-backdrop-filter 0.3s ease';
+      var neSel='a,.navbar-brand,.navbar-brand a,.dropdown-toggle,.mobile-toggle,.phone-header-btn,.mobile-hamburger-btn,.mobile-close-btn,.mobile-submenu-toggle,.nav-link';
+      var skipCls=['cart-link','login-link','nav-search-toggle','search-toggle'];
+      function sTC(c,clr){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){var sk=false;if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu')){sk=true;}for(var j=0;j<skipCls.length;j++){if(els[i].classList.contains(skipCls[j])){sk=true;break;}}if(!sk)els[i].style.setProperty('color',clr,'important');}}
+      function cTC(c){var els=c.querySelectorAll(neSel);for(var i=0;i<els.length;i++){if(els[i].closest('.sub-menu')||els[i].closest('.dropdown-menu'))continue;els[i].style.removeProperty('color');}}
+      function applyScrolled(){
+        nb.classList.add('scrolled');
+        if(window.innerWidth>768){
+          nb.style.setProperty('--frosted-text',st);
+          nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('background-color',fb,'important');
+          nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+        }
+        if(cm){cm.classList.add('scrolled');if(window.innerWidth>768){cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}}
+      }
+      function onS(){
+        if(window._zappyNavNoDarkHero) return;
+        if(window.innerWidth<=768){nb.classList.remove('scrolled');cTC(nb);if(cm){cm.classList.remove('scrolled');cTC(cm);}return;}
+        var y=window.scrollY||window.pageYOffset;
+        if(y>th){
+          nb.classList.add('scrolled');nb.style.setProperty('background-color',fb,'important');nb.style.setProperty('background-image','none','important');
+          nb.style.setProperty('--frosted-text',st);nb.style.backdropFilter='blur(12px)';nb.style.webkitBackdropFilter='blur(12px)';nb.style.boxShadow='0 2px 16px rgba(0,0,0,0.12)';
+          sTC(nb,st);
+          if(cm){cm.classList.add('scrolled');cm.style.setProperty('background',fb,'important');cm.style.setProperty('backdrop-filter','blur(12px)','important');cm.style.setProperty('-webkit-backdrop-filter','blur(12px)','important');sTC(cm,st);}
+        }else{
+          nb.classList.remove('scrolled');nb.style.setProperty('background-color','transparent','important');nb.style.removeProperty('background-image');
+          nb.style.removeProperty('--frosted-text');nb.style.backdropFilter='none';nb.style.webkitBackdropFilter='none';nb.style.boxShadow='none';
+          cTC(nb);
+          if(cm){cm.classList.remove('scrolled');cm.style.setProperty('background','transparent','important');cm.style.setProperty('backdrop-filter','none','important');cm.style.setProperty('-webkit-backdrop-filter','none','important');cTC(cm);}
+        }
+      }
+      function sLum(rv,gv,bv){rv/=255;gv/=255;bv/=255;rv=rv<=0.03928?rv/12.92:Math.pow((rv+0.055)/1.055,2.4);gv=gv<=0.03928?gv/12.92:Math.pow((gv+0.055)/1.055,2.4);bv=bv<=0.03928?bv/12.92:Math.pow((bv+0.055)/1.055,2.4);return 0.2126*rv+0.7152*gv+0.0722*bv;}
+      window.addEventListener('scroll',onS,{passive:true});
+      window.addEventListener('resize',onS,{passive:true});
+      onS();
+      var heroEl=document.querySelector('section[class*="hero"],[data-hero-type],main>section:first-child');
+      var hasDH=false;
+      if(heroEl){var hCs=getComputedStyle(heroEl);var hBI=hCs.backgroundImage;if(hBI&&hBI!=='none'){if(hBI.indexOf('url(')!==-1){var hM2=hCs.backgroundColor.match(/\d+/g);if(hM2&&hM2.length>=3){hasDH=sLum(parseInt(hM2[0]),parseInt(hM2[1]),parseInt(hM2[2]))<0.4;}else{hasDH=true;}}else if(hBI.indexOf('gradient')!==-1){var cM=hBI.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/g);if(cM&&cM.length>0){var tLm=0;for(var ci=0;ci<cM.length;ci++){var pts=cM[ci].match(/\d+/g);tLm+=sLum(parseInt(pts[0]),parseInt(pts[1]),parseInt(pts[2]));}hasDH=(tLm/cM.length)<0.4;}else{hasDH=true;}}else{hasDH=true;}}else{var hM=hCs.backgroundColor.match(/\d+/g);if(hM&&hM.length>=3){hasDH=sLum(parseInt(hM[0]),parseInt(hM[1]),parseInt(hM[2]))<0.4;}}}
+      if(!hasDH){window.removeEventListener('scroll',onS);window.removeEventListener('resize',onS);applyScrolled();window._zappyNavNoDarkHero=true;}
+    })();
+    </script>
+
+    <script id="zappy-mobile-lang-menu-script">
+    (function() {
+      function initMobileLangMenu() {
+        if (window.innerWidth > 768) {
+          var existingMenu = document.querySelector('.mobile-lang-menu');
+          if (existingMenu) existingMenu.remove();
+          return;
+        }
+        if (document.querySelector('.mobile-lang-menu')) return;
+        var switcher = document.querySelector('.lang-switcher');
+        if (!switcher) return;
+        var dropdown = switcher.querySelector('.lang-switcher-dropdown');
+        if (!dropdown) return;
+        var options = dropdown.querySelectorAll('.lang-option');
+        if (options.length === 0) return;
+        var navMenu = document.getElementById('navMenu') || document.querySelector('.nav-menu') || document.querySelector('nav ul');
+        if (!navMenu) return;
+        var currentLang = document.documentElement.lang || 'en';
+        var langConfigs = {
+          he: {name:'עברית',flag:'https://api.iconify.design/circle-flags/il.svg'},
+          en: {name:'English',flag:'https://api.iconify.design/circle-flags/us.svg'},
+          ar: {name:'العربية',flag:'https://api.iconify.design/circle-flags/sa.svg'},
+          fr: {name:'Français',flag:'https://api.iconify.design/circle-flags/fr.svg'},
+          es: {name:'Español',flag:'https://api.iconify.design/circle-flags/es.svg'},
+          de: {name:'Deutsch',flag:'https://api.iconify.design/circle-flags/de.svg'},
+          ru: {name:'Русский',flag:'https://api.iconify.design/circle-flags/ru.svg'},
+          zh: {name:'中文',flag:'https://api.iconify.design/circle-flags/cn.svg'},
+          ja: {name:'日本語',flag:'https://api.iconify.design/circle-flags/jp.svg'},
+          pt: {name:'Português',flag:'https://api.iconify.design/circle-flags/br.svg'},
+          it: {name:'Italiano',flag:'https://api.iconify.design/circle-flags/it.svg'},
+          ko: {name:'한국어',flag:'https://api.iconify.design/circle-flags/kr.svg'}
+        };
+        var container = document.createElement('div');
+        container.className = 'mobile-lang-menu';
+        var currentConfig = langConfigs[currentLang] || {name:currentLang,flag:''};
+        var toggleBtn = document.createElement('button');
+        toggleBtn.className = 'mobile-lang-toggle';
+        toggleBtn.type = 'button';
+        var currentFlagHtml = currentConfig.flag ? '<img src="' + currentConfig.flag + '" width="20" height="20" alt="" style="border-radius:50%;margin-right:8px;margin-left:8px;">' : '';
+        toggleBtn.innerHTML = currentFlagHtml + currentConfig.name;
+        container.appendChild(toggleBtn);
+        var optionsDiv = document.createElement('div');
+        optionsDiv.className = 'mobile-lang-options';
+        var currentLink = document.createElement('a');
+        currentLink.className = 'mobile-lang-option active';
+        currentLink.href = '#';
+        currentLink.innerHTML = currentFlagHtml + currentConfig.name;
+        optionsDiv.appendChild(currentLink);
+        options.forEach(function(opt) {
+          var link = document.createElement('a');
+          link.className = 'mobile-lang-option';
+          link.href = opt.getAttribute('href');
+          link.innerHTML = opt.innerHTML;
+          optionsDiv.appendChild(link);
+        });
+        container.appendChild(optionsDiv);
+        navMenu.appendChild(container);
+        toggleBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleBtn.classList.toggle('expanded');
+          optionsDiv.classList.toggle('expanded');
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileLangMenu); }
+      else { initMobileLangMenu(); }
+      window.addEventListener('resize', function() { clearTimeout(window._mlrt); window._mlrt = setTimeout(initMobileLangMenu, 250); });
+    })();
+    </script>
+</body>
+</html>
