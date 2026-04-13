@@ -2536,17 +2536,16 @@ main { margin-top: 0 !important; padding-top: 0 !important; }
   direction: rtl;
 }
 
-/* Medical card: row 1, col 1 (right in RTL) — slightly larger */
 .index-tracks-section .track-card--medical {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-/* Beauty card: row 1, col 2 — offset feel via margin */
-.index-tracks-section .track-card--beauty {
   grid-column: 2;
   grid-row: 1;
   margin-top: 40px;
+}
+
+.index-tracks-section .track-card--beauty {
+  grid-column: 1;
+  grid-row: 1;
+  margin-top: 0;
 }
 
 /* Travel card: row 2, spans both columns */
@@ -11697,6 +11696,28 @@ body.accessibility-widget-visible ._access-menu {
     font-size: 11px;
     padding: 7px 14px;
   }
+}
+
+.index-tracks-section .track-card--men {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.index-tracks-section .track-card--medical {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  margin-top: 40px !important;
+}
+
+.index-tracks-section .track-card--beauty {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  margin-top: 0 !important;
+}
+
+.index-tracks-section .track-card--travel {
+  grid-column: 1 / -1 !important;
+  grid-row: 3 !important;
 }
 
 /* ========== EMPTY SUBMENU HIDING (Auto-added by Zappy) ========== */
