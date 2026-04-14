@@ -13056,6 +13056,406 @@ body.accessibility-widget-visible ._access-menu {
   }
 }
 
+/* AI-generated section */
+/* ===== PROCESS SECTION ===== */
+.hw-process-section {
+  background: #0d0f11;
+  padding: 90px 20px 80px;
+  font-family: system-ui, sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background texture */
+.hw-process-section::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(ellipse at center, rgba(243, 43, 151, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hw-process-section::after {
+  content: '';
+  position: absolute;
+  bottom: -200px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(ellipse at center, rgba(177, 13, 99, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container */
+.hw-process-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== HEADER ===== */
+.hw-process-header {
+  text-align: center;
+  margin-bottom: 70px;
+}
+
+.hw-process-title {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+}
+
+.hw-process-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  border-radius: 2px;
+  margin: 14px auto 0;
+}
+
+.hw-process-subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: #a0a8b4;
+  margin: 0;
+  line-height: 1.7;
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+/* ===== STEPS WRAPPER ===== */
+.hw-steps-wrapper {
+  position: relative;
+}
+
+/* Horizontal connecting line (desktop) */
+.hw-timeline-line {
+  display: none;
+}
+
+/* ===== STEPS GRID ===== */
+.hw-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+/* ===== STEP CARD ===== */
+.hw-step-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(243, 43, 151, 0.18);
+  border-radius: 16px;
+  padding: 28px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.hw-step-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(243, 43, 151, 0.05) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 16px;
+}
+
+.hw-step-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(243, 43, 151, 0.18);
+  border-color: rgba(243, 43, 151, 0.45);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.hw-step-card:hover::before {
+  opacity: 1;
+}
+
+/* Highlighted middle card */
+.hw-step-card--highlight {
+  background: rgba(243, 43, 151, 0.08);
+  border-color: rgba(243, 43, 151, 0.4);
+  box-shadow: 0 8px 30px rgba(243, 43, 151, 0.15);
+}
+
+.hw-step-card--highlight:hover {
+  box-shadow: 0 20px 50px rgba(243, 43, 151, 0.28);
+  border-color: rgba(243, 43, 151, 0.65);
+}
+
+/* ===== STEP NUMBER ===== */
+.hw-step-number-wrap {
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.hw-step-number {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(243, 43, 151, 0.45);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  letter-spacing: 0;
+}
+
+.hw-step-card:hover .hw-step-number {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(243, 43, 151, 0.6);
+}
+
+/* ===== STEP CONTENT ===== */
+.hw-step-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== STEP ICON ===== */
+.hw-step-icon {
+  color: #E21987;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(243, 43, 151, 0.1);
+  border-radius: 10px;
+  margin-bottom: 4px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.hw-step-card:hover .hw-step-icon {
+  background: rgba(243, 43, 151, 0.2);
+  color: #F32B97;
+}
+
+/* ===== STEP TITLE ===== */
+.hw-step-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.3;
+  letter-spacing: -0.2px;
+}
+
+/* ===== STEP DESCRIPTION ===== */
+.hw-step-desc {
+  font-size: 0.875rem;
+  color: #8d96a3;
+  margin: 0;
+  line-height: 1.7;
+  transition: color 0.3s ease;
+}
+
+.hw-step-card:hover .hw-step-desc {
+  color: #aab4c0;
+}
+
+/* ===== CTA ===== */
+.hw-process-cta {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.hw-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 16px 36px;
+  border-radius: 50px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  box-shadow: 0 6px 28px rgba(243, 43, 151, 0.4);
+  letter-spacing: 0.2px;
+}
+
+.hw-cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(243, 43, 151, 0.55);
+  filter: brightness(1.08);
+}
+
+.hw-cta-btn:focus-visible {
+  outline: 3px solid #F32B97;
+  outline-offset: 4px;
+}
+
+.hw-cta-btn svg {
+  flex-shrink: 0;
+  transform: rotate(180deg); /* RTL arrow direction */
+  transition: transform 0.25s ease;
+}
+
+.hw-cta-btn:hover svg {
+  transform: rotate(180deg) translateX(4px);
+}
+
+/* ===== RESPONSIVE — TABLET ===== */
+@media (max-width: 1024px) {
+  .hw-steps-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .hw-step-card:nth-child(4),
+  .hw-step-card:nth-child(5) {
+    grid-column: span 1;
+  }
+
+  /* Center last two cards */
+  .hw-steps-grid .hw-step-card:nth-child(4) {
+    grid-column: 1 / 2;
+  }
+
+  .hw-steps-grid .hw-step-card:nth-child(5) {
+    grid-column: 2 / 3;
+  }
+}
+
+@media (max-width: 900px) {
+  .hw-steps-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .hw-steps-grid .hw-step-card:nth-child(4),
+  .hw-steps-grid .hw-step-card:nth-child(5) {
+    grid-column: auto;
+  }
+
+  .hw-steps-grid .hw-step-card:nth-child(5) {
+    grid-column: 1 / 3;
+    max-width: 340px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ===== RESPONSIVE — MOBILE ===== */
+@media (max-width: 600px) {
+  .hw-process-section {
+    padding: 64px 16px 60px;
+  }
+
+  .hw-process-header {
+    margin-bottom: 48px;
+  }
+
+  .hw-steps-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    position: relative;
+  }
+
+  /* Vertical connecting line on mobile */
+  .hw-steps-grid::before {
+    content: '';
+    position: absolute;
+    top: 26px;
+    right: 44px;
+    bottom: 26px;
+    width: 2px;
+    background: linear-gradient(180deg, #F32B97 0%, #B10D63 100%);
+    opacity: 0.25;
+    z-index: 0;
+  }
+
+  .hw-step-card {
+    flex-direction: row;
+    text-align: right;
+    align-items: flex-start;
+    padding: 20px 18px;
+    gap: 16px;
+  }
+
+  .hw-step-number-wrap {
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+
+  .hw-step-number {
+    width: 44px;
+    height: 44px;
+    font-size: 1.1rem;
+  }
+
+  .hw-step-content {
+    align-items: flex-start;
+    text-align: right;
+    gap: 6px;
+  }
+
+  .hw-step-icon {
+    display: none;
+  }
+
+  .hw-steps-grid .hw-step-card:nth-child(5) {
+    grid-column: auto;
+    max-width: none;
+    margin: 0;
+    width: auto;
+  }
+
+  .hw-cta-btn {
+    font-size: 0.97rem;
+    padding: 14px 28px;
+  }
+
+  .hw-process-cta {
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hw-process-title {
+    font-size: 1.7rem;
+  }
+
+  .hw-step-title {
+    font-size: 0.97rem;
+  }
+
+  .hw-step-desc {
+    font-size: 0.83rem;
+  }
+}
+
 /* ========== EMPTY SUBMENU HIDING (Auto-added by Zappy) ========== */
 .sub-menu:empty,
 .dropdown-menu:empty,
