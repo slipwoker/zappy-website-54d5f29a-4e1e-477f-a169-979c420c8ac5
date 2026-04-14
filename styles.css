@@ -12242,6 +12242,348 @@ body.accessibility-widget-visible ._access-menu {
   }
 }
 
+/* AI-generated section */
+/* =============================================
+   BKK BENEFITS SECTION
+   Dark background, pink gradient accents, RTL
+   ============================================= */
+
+.bkk-benefits-section {
+  background: #0c0e10;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 80% 10%, rgba(243, 43, 151, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 35% at 10% 90%, rgba(177, 13, 99, 0.10) 0%, transparent 60%);
+  padding: 100px 20px 80px;
+  font-family: system-ui, sans-serif;
+  direction: rtl;
+  position: relative;
+  overflow: hidden;
+}
+
+.bkk-benefits-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.015) 59px,
+      rgba(255,255,255,0.015) 60px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 59px,
+      rgba(255,255,255,0.015) 59px,
+      rgba(255,255,255,0.015) 60px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Container */
+.bkk-benefits-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---- Header ---- */
+.bkk-benefits-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.bkk-benefits-eyebrow {
+  display: inline-block;
+  background: linear-gradient(180deg, #F32B97 0%, #B10D63 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.bkk-benefits-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 16px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.bkk-benefits-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+  color: rgba(255, 255, 255, 0.65);
+  margin: 0 0 28px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.bkk-benefits-divider {
+  width: 64px;
+  height: 4px;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  border-radius: 2px;
+  margin: 0 auto;
+}
+
+/* ---- Grid ---- */
+.bkk-benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+/* ---- Card ---- */
+.bkk-benefit-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(243, 43, 151, 0.22);
+  border-radius: 20px;
+  padding: 36px 28px 32px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+}
+
+.bkk-benefit-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(243, 43, 151, 0.06) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.bkk-benefit-card:hover {
+  transform: translateY(-6px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(243, 43, 151, 0.5);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(243, 43, 151, 0.15),
+    0 8px 32px rgba(243, 43, 151, 0.15);
+}
+
+.bkk-benefit-card:hover::after {
+  opacity: 1;
+}
+
+/* Card accent bar */
+.bkk-card-accent {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  border-radius: 0 20px 20px 0;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+.bkk-benefit-card:hover .bkk-card-accent {
+  opacity: 1;
+}
+
+/* Icon wrapper */
+.bkk-card-icon-wrap {
+  width: 68px;
+  height: 68px;
+  background: rgba(243, 43, 151, 0.08);
+  border: 1px solid rgba(243, 43, 151, 0.2);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.bkk-benefit-card:hover .bkk-card-icon-wrap {
+  background: rgba(243, 43, 151, 0.15);
+  border-color: rgba(243, 43, 151, 0.45);
+  transform: scale(1.06);
+}
+
+.bkk-card-icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+  flex-shrink: 0;
+}
+
+/* Stat / bold number */
+.bkk-card-stat {
+  font-size: 1.25rem;
+  font-weight: 800;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* Card title */
+.bkk-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 12px;
+  line-height: 1.35;
+}
+
+/* Card description */
+.bkk-card-desc {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.62);
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* ---- CTA Strip ---- */
+.bkk-benefits-cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(243, 43, 151, 0.2);
+  border-radius: 16px;
+  padding: 28px 36px;
+}
+
+.bkk-cta-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+}
+
+.bkk-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary, linear-gradient(180deg, #F32B97 0%, #E21987 58%, #B10D63 100%));
+  color: #ffffff;
+  font-family: system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px 32px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 20px rgba(243, 43, 151, 0.35);
+}
+
+.bkk-cta-btn:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(243, 43, 151, 0.55);
+  filter: brightness(1.08);
+}
+
+.bkk-cta-btn:focus-visible {
+  outline: 3px solid #F32B97;
+  outline-offset: 3px;
+}
+
+.bkk-cta-btn:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* =============================================
+   RESPONSIVE — Tablet (2 columns)
+   ============================================= */
+@media (max-width: 1024px) {
+  .bkk-benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — Mobile (1 column)
+   ============================================= */
+@media (max-width: 600px) {
+  .bkk-benefits-section {
+    padding: 72px 16px 60px;
+  }
+
+  .bkk-benefits-header {
+    margin-bottom: 44px;
+  }
+
+  .bkk-benefits-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .bkk-benefit-card {
+    padding: 28px 22px 26px;
+  }
+
+  .bkk-card-icon-wrap {
+    width: 58px;
+    height: 58px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+  }
+
+  .bkk-card-icon {
+    width: 34px;
+    height: 34px;
+  }
+
+  .bkk-card-stat {
+    font-size: 1.15rem;
+  }
+
+  .bkk-benefits-cta-strip {
+    flex-direction: column;
+    text-align: center;
+    padding: 24px 20px;
+    gap: 18px;
+  }
+
+  .bkk-cta-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* =============================================
+   REDUCED MOTION
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  .bkk-benefit-card,
+  .bkk-card-icon-wrap,
+  .bkk-cta-btn {
+    transition: none;
+  }
+  .bkk-benefit-card:hover {
+    transform: none;
+  }
+}
+
 /* ========== EMPTY SUBMENU HIDING (Auto-added by Zappy) ========== */
 .sub-menu:empty,
 .dropdown-menu:empty,
